@@ -1,3 +1,6 @@
+[Link](https://chat.openai.com/c/7d0803c3-0abe-42ba-b687-4e802e333f0a)
+
+
 jetton-minter.d.ts.md
 This TypeScript code defines a class named `JettonMinter` that extends another class `Contract`. Let's break down the key elements:
 
@@ -571,3 +574,192 @@ This TypeScript code appears to define some constants and functions related to h
    This function `parseAddress` takes a `Cell` and returns either an `Address` or `undefined`. It is likely used to parse an address from the given cell.
 
 Overall, these functions and constants suggest that the code is dealing with serialization and parsing of URIs and addresses, and there are specific considerations for different types of data or content, such as on-chain and off-chain content. If you have specific questions about how to use these functions or need further clarification on any part, feel free to ask!
+
+
+
+***
+
+
+***
+
+ft
+
+This TypeScript code defines a class named `JettonMinter` that extends another class `Contract`. Let's break down the key elements:
+
+1. **Imports:**
+   ```typescript
+   import BN from 'bn.js';
+   import { Cell } from '../../../boc/cell';
+   import { HttpProvider } from '../../../providers/http-provider';
+   import { Address } from '../../../utils/address';
+   import { Contract, ContractMethods, ContractOptions } from '../../contract';
+   ```
+
+   These are import statements bringing in necessary dependencies and classes from other modules.
+
+2. **Interfaces:**
+   ```typescript
+   export interface JettonMinterOptions extends ContractOptions {
+       wc?: 0;
+       adminAddress: Address;
+       jettonContentUri: string;
+       jettonWalletCodeHex: string;
+   }
+   ```
+
+   This interface `JettonMinterOptions` extends another interface `ContractOptions` and adds some specific properties.
+
+   ```typescript
+   export interface JettonMinterMethods extends ContractMethods {
+       // ... method signatures ...
+   }
+   ```
+
+   This is an interface `JettonMinterMethods` defining method signatures for the `JettonMinter` class.
+
+   ```typescript
+   export interface MintBodyParams {
+       // ... parameters ...
+   }
+   ```
+
+   This is an interface `MintBodyParams` defining parameters for the `createMintBody` method.
+
+   ```typescript
+   export interface JettonData {
+       // ... properties ...
+   }
+   ```
+
+   This is an interface `JettonData` representing data related to the `JettonMinter` class.
+
+3. **Class Definition:**
+   ```typescript
+   export declare class JettonMinter extends Contract<JettonMinterOptions, JettonMinterMethods> {
+       // ... constructor and methods ...
+   }
+   ```
+
+   The `JettonMinter` class extends `Contract` and specifies the generic types `JettonMinterOptions` and `JettonMinterMethods`.
+
+4. **Constructor:**
+   ```typescript
+   constructor(provider: HttpProvider, options: JettonMinterOptions) {
+       super(provider, options);
+   }
+   ```
+
+   The constructor takes a `HttpProvider` and some `options`, then calls the constructor of the parent class `Contract` using `super`.
+
+5. **Additional Methods:**
+   ```typescript
+   createMintBody(params: MintBodyParams): Cell;
+   getJettonData(): Promise<JettonData>;
+   getJettonWalletAddress(ownerAddress: Address): Promise<Address>;
+   ```
+
+   These methods provide functionality related to creating mint bodies, retrieving jetton data, and getting the jetton wallet address.
+
+6. **Protected Method:**
+   ```typescript
+   protected createDataCell(): Cell;
+   ```
+
+   This protected method is meant to be used internally within the class for creating a cell that contains jetton minter data.
+
+The class appears to be part of a larger system related to a jetton minter, possibly in the context of a blockchain or cryptocurrency project. The class has methods for creating mint bodies, retrieving data, and managing jetton wallets. If you have specific questions about parts of the code or if you need help with something specific, feel free to ask!
+
+
+***
+
+This TypeScript code defines a class named `JettonWallet` that extends another class `Contract`. Let's break down the key elements:
+
+1. **Imports:**
+   ```typescript
+   import BN from 'bn.js';
+   import { Cell } from '../../../boc/cell';
+   import { HttpProvider } from '../../../providers/http-provider';
+   import { Address } from '../../../utils/address';
+   import { Contract, ContractMethods, ContractOptions } from '../../contract';
+   ```
+
+   These are import statements bringing in necessary dependencies and classes from other modules.
+
+2. **Interfaces:**
+   ```typescript
+   export interface JettonWalletOptions extends ContractOptions {
+       wc?: 0;
+   }
+   ```
+
+   This interface `JettonWalletOptions` extends another interface `ContractOptions` and adds a specific property.
+
+   ```typescript
+   export interface JettonWalletMethods extends ContractMethods {
+       // ... method signatures ...
+   }
+   ```
+
+   This is an interface `JettonWalletMethods` defining method signatures for the `JettonWallet` class.
+
+   ```typescript
+   export interface WalletData {
+       // ... properties ...
+   }
+   ```
+
+   This is an interface `WalletData` representing data related to the `JettonWallet` class.
+
+   ```typescript
+   export interface TransferBodyParams {
+       // ... parameters ...
+   }
+   ```
+
+   This is an interface `TransferBodyParams` defining parameters for the `createTransferBody` method.
+
+   ```typescript
+   export interface BurnBodyParams {
+       // ... parameters ...
+   }
+   ```
+
+   This is an interface `BurnBodyParams` defining parameters for the `createBurnBody` method.
+
+3. **Class Definition:**
+   ```typescript
+   export declare class JettonWallet extends Contract<JettonWalletOptions, JettonWalletMethods> {
+       // ... constructor and methods ...
+   }
+   ```
+
+   The `JettonWallet` class extends `Contract` and specifies the generic types `JettonWalletOptions` and `JettonWalletMethods`.
+
+4. **Static Property:**
+   ```typescript
+   static codeHex: string;
+   ```
+
+   This static property `codeHex` is a string and seems to represent the hexadecimal code associated with the `JettonWallet` class.
+
+5. **Constructor:**
+   ```typescript
+   constructor(provider: HttpProvider, options: JettonWalletOptions) {
+       super(provider, options);
+   }
+   ```
+
+   The constructor takes a `HttpProvider` and some `options`, then calls the constructor of the parent class `Contract` using `super`.
+
+6. **Additional Methods:**
+   ```typescript
+   getData(): Promise<WalletData>;
+   createTransferBody(params: TransferBodyParams): Promise<Cell>;
+   createBurnBody(params: BurnBodyParams): Promise<Cell>;
+   ```
+
+   These methods provide functionality related to getting wallet data, creating transfer bodies, and creating burn bodies.
+
+The class appears to be part of a larger system related to jetton wallets, possibly in the context of a blockchain or cryptocurrency project. The class has methods for interacting with wallet data, creating transfer bodies, and creating burn bodies. If you have specific questions about parts of the code or if you need help with something specific, feel free to ask!
+
+
